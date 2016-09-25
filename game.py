@@ -100,11 +100,104 @@ def gameloop():
                 if event.key==pygame.K_SPACE:
                     egg = Projectiles(direction, x, y, Bullets)
 
-        x += x_change
+        #x += x_change
 
+        if currentRoom == 1: # In Chicken Run
+            gameDisplay.blit(bg1, [0,0])
+            animal(x,y)
+            
+            if x < 0: # Farm
+                gameDisplay.blit(bg2, [0,0])
+                displayBullets = False
+                currentRoom = 2
+                x = display_width - 72
+                
+
+            if x > display_width: 
+                x -= 25
+
+            if y > display_height: 
+                y -= 25
+
+            if y < 0: 
+                y += 25
+            
+            animal(x,y)
+            
+        elif currentRoom == 2: # In Barn
+            gameDisplay.blit(bg2, [0,0])
+            animal(x,y)
+            
+            if x > display_width: # Chicken Run
+                gameDisplay.blit(bg1, [0,0])
+                currentRoom = 1
+                x = 0
+
+            if x < 0: # Farm
+                gameDisplay.blit(bg3, [0,0])
+                currentRoom = 3
+                x = display_width - 72
+
+            if y > display_height: # Pond
+                gameDisplay.blit(bg4, [0,0])
+                currentRoom = 4
+                y = 0
+
+            if y < 0: # Wood
+                gameDisplay.blit(bg5, [0,0])
+                currentRoom = 5
+                y = display_height - 90
+
+            animal(x,y)
+
+        elif currentRoom == 3: # In Farm
+            gameDisplay.blit(bg3, [0,0])
+            animal(x,y)
+
+            #if x <0:
+            
+            if x > display_width: # Barn
+                gameDisplay.blit(bg2, [0,0])
+                currentRoom = 2
+                x = 0
+                
+            #if y < 0:
+                
+            #if y > display_height:
+
+            animal(x,y)
+            
+        elif currentRoom == 4: # in Pond
+            gameDisplay.blit(bg4, [0,0])
+            animal(x,y)
+
+            # if x < 0:
+            
+            # if x > display_width:
+            
+            if y < 0: # Barn
+                gameDisplay.blit(bg2, [0,0])
+                currentRoom = 2
+                y = display_height - 90
+
+            # if y > display_height:
+
+            animal(x,y)
+            
+        elif currentRoom == 5: # In Wood
+            gameDisplay.blit(bg5, [0,0])
+            animal(x,y)
+
+            # if x < 0:
+
+            # if x > display_width:
 
             if y > display_height:
                 gameDisplay.blit(bg2, [0,0])
+                currentRoom = 2
+                y = display_height - 90
+
+            # if y < 0:
 
             animal(x,y)
 
@@ -115,7 +208,14 @@ def gameloop():
 
         pygame.display.update()
         clock.tick(60)
-    
+
+##Room  Map
+##1     Chicken Run
+##2     Barn
+##3     Farm
+##4     Pond
+##5     Wood
+##6     
 
 gameloop()
 pygame.quit()
