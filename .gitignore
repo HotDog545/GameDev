@@ -1,1 +1,7 @@
+# folders like "__pycache__"
 __*
+
+# compiled python files
+*.pyc
+
+# add more file path patterns to exclude:
