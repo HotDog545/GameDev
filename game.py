@@ -1,7 +1,8 @@
 import pygame
 import random
 import math
-
+import winsound
+from Projectile import *
 pygame.init()
 
 title = "KFPoop"
@@ -11,19 +12,21 @@ display_height= 700
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption(title)
 clock = pygame.time.Clock()
-icon = pygame.image.load("img/icon.ico")
+icon = pygame.image.load("Icon.ico")
 pygame.display.set_icon(icon)
-bg = pygame.image.load("img/farm_map.png").convert()
-bg2 = pygame.image.load("img/farm_map_2.png").convert()
+bg1 = pygame.image.load("Chicken run map.png").convert()
+bg2 = pygame.image.load("Barn map.png").convert()
+bg3 = pygame.image.load("Farm map.png").convert()
+bg4 = pygame.image.load("Pond map.png").convert()
+bg5 = pygame.image.load("Wood map.png").convert()
 
 black = (0,0,0)
 white = (0,0,255)
 
-animalchar = pygame.image.load("img/chicken.png")
+animalchar = pygame.image.load("Chicken.png")
 
 animal_width = 75
-
-
+        
 #def collision():
     
 
@@ -58,53 +61,61 @@ def die():
 #        self.rect.y += dy * self.speed
 
 def gameloop():
+    #winsound.PlaySound("
     x = 0
     y = 475
     
-   
+    direction = "Up"
+    Bullets = PG.sprite.Group()
     
     x_change = 0
 
     gameStart = True
-
+    currentRoom = 1
     while gameStart:
-    
+        displayBullets = True
+        
         for event in pygame.event.get():
         
             if event.type==pygame.QUIT:
-                gameStart=True
+                gameStart=False
 
             if event.type==pygame.KEYDOWN:
                 if event.key==pygame.K_UP:
                     y-=25
+                    direction = "Up"
 
                 if event.key==pygame.K_DOWN:
                     y+=25
+                    direction = "Down"
 
                 if event.key==pygame.K_LEFT:
                     x-=25
+                    direction = "Left"
 
                 if event.key==pygame.K_RIGHT:
                     x+=25
+                    direction = "Right"
 
-
+                if event.key==pygame.K_SPACE:
+                    egg = Projectiles(direction, x, y, Bullets)
 
         x += x_change
 
 
-        gameDisplay.blit(bg, [0,0])
-        animal(x,y)
+            if y > display_height:
+                gameDisplay.blit(bg2, [0,0])
 
-        
-        if x < 0:
-            gameDisplay.blit(bg2, [0,0])
             animal(x,y)
 
-        
+            
+        Bullets.update()
+        if displayBullets:
+            Bullets.draw(gameDisplay)
 
         pygame.display.update()
         clock.tick(60)
-
+    
 
 gameloop()
 pygame.quit()
