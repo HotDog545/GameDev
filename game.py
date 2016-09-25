@@ -1,8 +1,8 @@
 import pygame
 import random
 import math
-import winsound
-from Projectile import *
+#import winsound
+from projectile import *
 pygame.init()
 
 title = "KFPoop"
@@ -12,18 +12,18 @@ display_height= 700
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption(title)
 clock = pygame.time.Clock()
-icon = pygame.image.load("Icon.ico")
+icon = pygame.image.load("img/icon.ico")
 pygame.display.set_icon(icon)
-bg1 = pygame.image.load("Chicken run map.png").convert()
-bg2 = pygame.image.load("Barn map.png").convert()
-bg3 = pygame.image.load("Farm map.png").convert()
-bg4 = pygame.image.load("Pond map.png").convert()
-bg5 = pygame.image.load("Wood map.png").convert()
+bg1 = pygame.image.load("img/chicken_run_map.png").convert()
+bg2 = pygame.image.load("img/barn_map.png").convert()
+bg3 = pygame.image.load("img/farm_map.png").convert()
+bg4 = pygame.image.load("img/pond_map.png").convert()
+bg5 = pygame.image.load("img/wood_map.png").convert()
 
 black = (0,0,0)
 white = (0,0,255)
 
-animalchar = pygame.image.load("Chicken.png")
+animalchar = pygame.image.load("img/chicken.png")
 
 animal_width = 75
         
